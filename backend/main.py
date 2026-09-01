@@ -2,10 +2,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from agents.research import run_research_agent
+from graph.build_graph import build_graph
 
-query = input("What would you like to research?\n")
 
 if __name__ == "__main__":
-    answer = run_research_agent(query)
-    print(answer)
+    query = input("What would you like to research?\n")
+
+    app = build_graph()
+    result = app.invoke({"query":query})
+    print(result["report"])
