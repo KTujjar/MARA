@@ -37,8 +37,8 @@ def research_node(state: ResearchState, max_iterations : int=8) -> dict:
     
     if state.get("critique_notes"):
         prompt += (
-            f"A previous review flagged these gaps - focus on clisng them:\n"
-            f"{state.get('critique_node','')}\n\n"
+            f"A previous review flagged these gaps - focus on closing them:\n"
+            f"{state.get('critique_notes','')}\n\n"
         )
     prompt += f"Original question: {state['query']}"
 
@@ -60,7 +60,7 @@ def research_node(state: ResearchState, max_iterations : int=8) -> dict:
             findings = state.get("findings", []) + [summary]
             return {
                 "findings": findings,
-                "research_rounds": state.get("resaerch_rounds", 0) + 1,
+                "research_rounds": state.get("research_rounds", 0) + 1,
             }
 
         tool_results: list[ToolResultBlockParam] = []
