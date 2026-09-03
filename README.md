@@ -56,7 +56,7 @@ prompt/completion visibility, not just which node ran.
 ## Project structure
 
 ```
-Mara/
+MARA/
 ├── .env.example
 ├── backend/
 │   ├── agents/        # orchestrator, research, critique, writer
