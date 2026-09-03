@@ -1,4 +1,4 @@
-# Mara — Multi-Agent Research Assistant
+# MARA — Multi-Agent Research Assistant
 
 A research assistant that takes a user query, plans the research, gathers information
 from the web and local documents, fact-checks its own findings, and writes a synthesized
