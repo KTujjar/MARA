@@ -143,5 +143,3 @@ survives `docker compose down` / `up` cycles.
   support the Anthropic SDK's v1.0 removal of the legacy Completions API. Safe to
   re-evaluate once `langsmith` ships a compatible release.
 
-## Project status
-See [`PROJECT_STATUS.md`](./PROJECT_STATUS.md) for phase-by-phase build status.
