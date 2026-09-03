@@ -110,6 +110,7 @@ dependencies = [
     "setuptools==84.0.0",
     "six==1.17.0",
     "soupsieve==2.9.2",
+    "sqlalchemy>=2.0.52",
     "stack-data==0.6.3",
     "sympy==1.14.0",
     "terminado==0.18.1",
