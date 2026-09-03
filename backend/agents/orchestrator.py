@@ -1,9 +1,10 @@
 import anthropic
 from anthropic.types import MessageParam
+from langsmith.wrappers import wrap_anthropic
 
 from graph.state import ResearchState
 
-client = anthropic.Anthropic()
+client = wrap_anthropic(anthropic.Anthropic())
 
 def orchestrator_node(state: ResearchState) -> dict:
     """Break the user's query into a short research plan the 

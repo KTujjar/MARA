@@ -1,0 +1,20 @@
+# Stage 1: build the static assets
+FROM node:22-slim AS build
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
+
+# Vite bakes VITE_* variables into the compiled JS bundle at BUILD time,
+# not read at container runtime like a normal env var. Setting this in
+# docker-compose's `environment:` section for the frontend service would
+# do nothing — it has to be passed as a build ARG instead, like this.
+ARG VITE_API_BASE_URL=http://localhost:8000
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+RUN npm run build
+
+# Stage 2: serve the built assets with nginx (small, no Node runtime needed)
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

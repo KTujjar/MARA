@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ../deploy/Dockerfile.backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../.env
+    volumes:
+      # Without these, app.db and the Chroma index live only inside the
+      # container's writable layer and vanish on `docker compose down`.
+      # Mounting them back onto the host is what makes them persist —
+      # the same ephemeral-filesystem issue we flagged for real cloud
+      # deploys, just fixed differently for local dev.
+      - ../backend/db:/app/db
+      - ../backend/rag/chroma_db:/app/rag/chroma_db
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../deploy/Dockerfile.frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend

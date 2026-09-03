@@ -1,10 +1,12 @@
 import json
 import anthropic
 from anthropic.types import MessageParam
+from langsmith.wrappers import wrap_anthropic
+
 
 from graph.state import ResearchState
 
-client = anthropic.Anthropic()
+client = wrap_anthropic(anthropic.Anthropic())
 
 #so the research/critique loop doesnt loop forever
 MAX_RESEARCH_ROUNDS = 2

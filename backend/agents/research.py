@@ -5,8 +5,10 @@ from tools.web_search import web_search
 import anthropic
 from anthropic.types import ToolParam, MessageParam, ToolResultBlockParam 
 from typing import Any, cast
+from langsmith.wrappers import wrap_anthropic
 
-client = anthropic.Anthropic()
+
+client = wrap_anthropic(anthropic.Anthropic())
 
 TOOLS:list[ToolParam] = [
     {
